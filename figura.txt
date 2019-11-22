@@ -1,0 +1,3 @@
+Es una figura?;0;0
+No pude adivinar;1;1
+Es un triangulo;0;2
