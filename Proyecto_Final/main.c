@@ -5,8 +5,8 @@
 int
 main ()
 {
-  struct ArbolAdivinador *Raiz;	/* struct ArbolAdivinador raiz del arbol */
-  struct ArbolAdivinador *Q, *P;
+  struct ArbolAdivinador *Raiz=NULL;	/* struct ArbolAdivinador raiz del arbol */
+  struct ArbolAdivinador *Q=NULL, *P=NULL;
   int Salir = FALSE;		/* Mientras Salir sea FALSE continua jugando */
   int Resp1;			/* Almacena respuestas basicas (Si/No, True/False) */
   int Resp2;			/* Almacena respuestas para añadir nodos al arbol */
