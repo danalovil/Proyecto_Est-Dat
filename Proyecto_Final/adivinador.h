@@ -14,4 +14,6 @@ int Respuesta (void);
 void Borrar (struct ArbolAdivinador *);
 struct ArbolAdivinador *Cargar (void);
 
+struct ArbolAdivinador *LeeArbol (FILE * fe);
+void Guardar (struct ArbolAdivinador *);
 #endif	
