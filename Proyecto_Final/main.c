@@ -103,14 +103,14 @@ main ()
 	}
       /* Pregunta al jugador si quiere seguir jugando */
       printf
-	("¿Deseas terminar el juego? (Si/No) \nSi respondes que 'Si' saldras del programa y guardaras los nuevos animales propuestos, si tu respustas es 'No' regresaras al comienzo del juego\n");
+	("¿Deseas terminar el juego? (Si/No) \nSi respondes que 'Si' saldras del programa \ny guardaras los nuevos animales propuestos (si los hubo). \nSi tu respuesta es 'No', regresaras al comienzo del juego.\n");
       Salir = Respuesta ();
     }
   while (!Salir);		/* Permanece jugando mientras se responda que si */
 
   /* Ultimos pasos */
   Guardar (Raiz);		/* Guarda el arrbol en disco */
-  VerArbol (Raiz);		/* Despliega el arbol */
+  /* VerArbol (Raiz);		/* Despliega el arbol */
   Borrar (Raiz);		/* Borra memoria dinamica */
   return 0;
 }

@@ -15,21 +15,21 @@ RMariposa
 PVive en el mar
 PEs de gran tamaño
 RBallena
-PTiene Branquias
-PEs un Depredador
+PTiene branquias
+PEs depredador
 RTiburon
-PVive en Cardumenes
+PVive en cardumenes
 RPez
-RCaballito de Mar
+RCaballito de mar
 PEs un crustaceo
 RCangrejo
 RDelfin
 PEs anfibio
-PEs un depredador
+PEs depredador
 RCocodrilo
 PTiene caparazon
 RTortuga
-PEs de gran tamaño?
+PEs de gran tamaño
 RHipopotamo
 RSapo
 PEs mamifero
