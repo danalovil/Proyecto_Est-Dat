@@ -8,7 +8,7 @@ int main ()
   struct ArbolAdivinador *Q, *P;
   int Salir = FALSE;		/* Mientras Salir sea FALSE continua jugando */
   int Resp1;			/* Almacena respuestas basicas (Si/No, True/False) */
-  int Resp2;			/* Almacena respuestas para a�adir nodos al arbol */
+  int Resp2;			/* Almacena respuestas para añadir nodos al arbol */
   char Nuevo[80];		/* Nombre de animal nuevo */
   char Pregunta[80];		/* Pregunta para distinguir animal nuevo */
   Raiz = Cargar ();		/* Leer el arbol desde archivo */
@@ -39,3 +39,46 @@ int main ()
 /* Agregar faltante, como lo comentamos, quitar comentario cuando ingresen codigo */
 return 0;
 }
+
+      while (Q->Si);		/* do...while, miestras haya preguntas por hacer */
+      if (Resp1)		/* Si la ultima respuesta fue Si, el programa ha adivinado el animal */
+	printf ("Lo he adivinado!!!\n");
+      else			/* En caso contrario, es que no lo conoce */
+	{
+	  printf ("No conozco este animal, pero si me respondes a unas\n");
+	  printf ("preguntas lo incluire en mi lista.\n");
+
+	  do			/* Este bucle asegura que no se añadiran nodos con errores */
+	    {
+	      printf ("\nDe que animal se trata?\n");
+	      fgets (Nuevo, 80, stdin);	/* Lee el nombre del animal */
+	      while (Nuevo[strlen (Nuevo) - 1] < ' ')
+		Nuevo[strlen (Nuevo) - 1] = 0;
+	      printf ("Dame una pregunta que sirva para distinguir un/a\n");
+	      printf ("%s\nde un/a\n%s\n", P->Texto, Nuevo);
+	      printf ("a la que se pueda contestar si o no:\n");
+	      fgets (Pregunta, 80, stdin);	/* Lee la pregunta para distinguir el nuevo animal */
+	      while (Pregunta[strlen (Pregunta) - 1] < ' ')
+		Pregunta[strlen (Pregunta) - 1] = 0;	
+	      printf ("Que respuesta se ha de dar a esta pregunta:\n");
+	      printf ("%s?\n", Pregunta);
+	      printf ("Para obtener: %s\n", Nuevo);
+	      printf ("como respuesta: Si o No:\n");
+	      Resp1 = Respuesta ();	/* Lee la respuesta adecuada a la pregunta leida */
+
+	      /* Muestra al jugador los datos leidos para que verifique si son correctos */
+	      printf ("Veamos si lo he entendido bien:\n");
+	      printf ("A la pregunta: %s?\n", Pregunta);
+	      if (Resp1)
+		{
+		  printf ("Si se responde SI se trata de un %s\n", Nuevo);
+		  printf ("y si se responde NO podria ser un %s\n", P->Texto);
+		}
+	      else
+		{
+		  printf ("Si se responde SI se trata de un %s\n", P->Texto);
+		  printf ("y si se responde NO podria ser un %s\n", Nuevo);
+		}
+	      printf ("Es correcto?");
+	      Resp2 = Respuesta ();	/* Si Resp2==TRUE, los datos son correctos */
+	    }
