@@ -5,15 +5,17 @@
 #include <string.h>
 #include <stdlib.h>
 
-struct ArbolAdivinador 
+struct ArbolAdivinador
 {
-	char Texto[80];
-	struct ArbolAdivinador *Si, *No;
+  char Texto[80];
+  struct ArbolAdivinador *Si, *No;
 };
 int Respuesta (void);
 void Borrar (struct ArbolAdivinador *);
 struct ArbolAdivinador *Cargar (void);
 
-struct ArbolAdivinador *LeeArbol (FILE * fe);
+struct ArbolAdivinador *LeeArbol (FILE * );
 void Guardar (struct ArbolAdivinador *);
-#endif	
+void EscribeArbol (FILE * , struct ArbolAdivinador *);
+void VerArbol (struct ArbolAdivinador *);
+#endif

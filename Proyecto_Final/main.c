@@ -2,7 +2,8 @@
 #define TRUE 1
 #define FALSE 0
 /* Funcion principal, cuerpo de programa */
-int main ()
+int
+main ()
 {
   struct ArbolAdivinador *Raiz;	/* struct ArbolAdivinador raiz del arbol */
   struct ArbolAdivinador *Q, *P;
@@ -18,6 +19,7 @@ int main ()
       /* Inicio del juego */
       printf ("Piensa en un animal y yo intentare adivinarlo.\n");
       printf ("Pulsa la tecla Enter para comenzar.\n");
+      printf ("Instrucciones: \n Para Si = S|s \n No = *Cualquier tecla*\n");
       Respuesta ();
       P = Raiz;			/* P apunta al nodo raiz, P = nodo actual */
 
@@ -36,10 +38,6 @@ int main ()
 	    else
 	      P = P->No;	/* Dependiendo de la respuesta */
 	}
-/* Agregar faltante, como lo comentamos, quitar comentario cuando ingresen codigo */
-return 0;
-}
-
       while (Q->Si);		/* do...while, miestras haya preguntas por hacer */
       if (Resp1)		/* Si la ultima respuesta fue Si, el programa ha adivinado el animal */
 	printf ("Lo he adivinado!!!\n");
@@ -53,13 +51,13 @@ return 0;
 	      printf ("\nDe que animal se trata?\n");
 	      fgets (Nuevo, 80, stdin);	/* Lee el nombre del animal */
 	      while (Nuevo[strlen (Nuevo) - 1] < ' ')
-		Nuevo[strlen (Nuevo) - 1] = 0;
+		Nuevo[strlen (Nuevo) - 1] = 0;	/* Elimina retorno de linea */
 	      printf ("Dame una pregunta que sirva para distinguir un/a\n");
 	      printf ("%s\nde un/a\n%s\n", P->Texto, Nuevo);
 	      printf ("a la que se pueda contestar si o no:\n");
-	      fgets (Pregunta, 80, stdin);	/* Lee la pregunta para distinguir el nuevo animal */
+	      fgets (Pregunta, 80, stdin);	/* Lee la progunta para distinguir el nuevo animal */
 	      while (Pregunta[strlen (Pregunta) - 1] < ' ')
-		Pregunta[strlen (Pregunta) - 1] = 0;	
+		Pregunta[strlen (Pregunta) - 1] = 0;	/* Elimina retorno de linea */
 	      printf ("Que respuesta se ha de dar a esta pregunta:\n");
 	      printf ("%s?\n", Pregunta);
 	      printf ("Para obtener: %s\n", Nuevo);
@@ -82,3 +80,37 @@ return 0;
 	      printf ("Es correcto?");
 	      Resp2 = Respuesta ();	/* Si Resp2==TRUE, los datos son correctos */
 	    }
+	  while (!Resp2);	/* Repite el proceso hasta que el jugador de el visto bueno */
+
+	  /* Añadir el nodo nuevo */
+	  Q = malloc (sizeof (struct ArbolAdivinador));	/* Creamos un nodo nuevo */
+	  strcpy (Q->Texto, P->Texto);	/* Copiamos el Animal nuevo al nuevo Nodo */
+	  Q->Si = NULL;		/* Como es un nodo hoja, Q->Si */
+	  Q->No = NULL;		/* y  Q->No seran NULL */
+	  if (Resp1)
+	    P->No = Q;		/* Caso a) Rama de P->No es el animal 1 */
+	  else
+	    P->Si = Q;		/* Caso b) Rama de P->Si es el animal 1 */
+	  Q = malloc (sizeof (struct ArbolAdivinador));	/* Creamos un nuevo nodo */
+	  strcpy (Q->Texto, Nuevo);	/* para el nuevo animal */
+	  Q->Si = NULL;		/* que también es un nodo hoja */
+	  Q->No = NULL;
+	  if (Resp1)
+	    P->Si = Q;		/* Caso a) Rama de P->Si es el animal nuevo */
+	  else
+	    P->No = Q;		/* Caso b) Rama de P->No es el animal nuevo */
+	  strcpy (P->Texto, Pregunta);	/* El nodo Original es ahora la pregunta */
+	}
+      /* Pregunta al jugador si quiere seguir jugando */
+      printf
+	("¿Deseas terminar el juego? (Si/No) \nSi respondes que 'Si' saldras del programa y guardaras los nuevos animales propuestos, si tu respustas es 'No' regresaras al comienzo del juego\n");
+      Salir = Respuesta ();
+    }
+  while (!Salir);		/* Permanece jugando mientras se responda que si */
+
+  /* Ultimos pasos */
+  Guardar (Raiz);		/* Guarda el arrbol en disco */
+  VerArbol (Raiz);		/* Despliega el arbol */
+  Borrar (Raiz);		/* Borra memoria dinamica */
+  return 0;
+}
